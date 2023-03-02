@@ -1,0 +1,31 @@
+#Open AI가 가미된 서비스를 만들어 보자
+
+import os
+import openai
+openai.organization = "아이디 넣으세요"
+openai.api_key = "API 키 넣으세요"
+openai.Model.list()
+
+ctt = "create python code to find correlation between all sp500 stocks"
+
+
+completion = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "user", "content": ctt}
+  ]
+)
+
+print(completion.choices[0].message)
+
+openai.Edit.create(
+  model="text-davinci-edit-001",
+  input= ipt,
+  instruction="Summarize the statement"
+)
+
+openai.Image.create(
+  prompt="A cute baby sea otter",
+  n=2,
+  size="1024x1024"
+)
