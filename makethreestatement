@@ -1,15 +1,71 @@
-# Input variables
-revenue = float(input("Enter revenue: "))
-cost_of_goods_sold = float(input("Enter cost of goods sold: "))
-gross_profit = revenue - cost_of_goods_sold
-operating_expenses = float(input("Enter operating expenses: "))
-net_income = gross_profit - operating_expenses
+# Import pandas module
+import pandas as pd
 
-# Print income statement
+# Define variables
+year_list = []
+revenue_list = []
+cost_of_goods_sold_list = []
+gross_profit_list = []
+operating_expenses_list = []
+ebitda_list = []
+depreciation_list = []
+ebit_list = []
+interest_expense_list = []
+tax_rate = 0.25
+net_income_list = []
+
+# Get input data for 5 years
+for year in range(1, 6):
+    year_list.append(f"Year {year}")
+    revenue_input = float(input("Enter revenue: "))
+    cost_of_goods_sold_input = float(input("Enter cost of goods sold: "))
+    operating_expenses_input = float(input("Enter operating expenses: "))
+    depreciation_input = float(input("Enter depreciation: "))
+    interest_expense_input = float(input("Enter interest expense: "))
+    
+    # Calculate financial metrics
+    gross_profit_input = revenue_input - cost_of_goods_sold_input
+    ebitda_input = gross_profit_input - operating_expenses_input
+    ebit_input = ebitda_input - depreciation_input
+    net_income_input = ebit_input - (interest_expense_input * (1 - tax_rate))
+    
+    # Append values to lists
+    revenue_list.append(revenue_input)
+    cost_of_goods_sold_list.append(cost_of_goods_sold_input)
+    gross_profit_list.append(gross_profit_input)
+    operating_expenses_list.append(operating_expenses_input)
+    ebitda_list.append(ebitda_input)
+    depreciation_list.append(depreciation_input)
+    ebit_list.append(ebit_input)
+    interest_expense_list.append(interest_expense_input)
+    net_income_list.append(net_income_input)
+
+# Create a dictionary of lists
+income_statement_dict = {'Year': year_list,
+                        'Revenue': revenue_list,
+                        'COGS': cost_of_goods_sold_list,
+                        'Gross Profit': gross_profit_list,
+                        'Operating Expenses': operating_expenses_list,
+                        'EBITDA': ebitda_list,
+                        'Depreciation': depreciation_list,
+                        'EBIT': ebit_list,
+                        'Interest Expense': interest_expense_list,
+                        'Net Income': net_income_list}
+
+# Create a pandas dataframe from the dictionary
+income_statement_df = pd.DataFrame(income_statement_dict)
+
+# Format the data in the dataframe
+income_statement_df['Revenue'] = income_statement_df['Revenue'].map('${:,.2f}'.format)
+income_statement_df['COGS'] = income_statement_df['COGS'].map('${:,.2f}'.format)
+income_statement_df['Gross Profit'] = income_statement_df['Gross Profit'].map('${:,.2f}'.format)
+income_statement_df['Operating Expenses'] = income_statement_df['Operating Expenses'].map('${:,.2f}'.format)
+income_statement_df['EBITDA'] = income_statement_df['EBITDA'].map('${:,.2f}'.format)
+income_statement_df['Depreciation'] = income_statement_df['Depreciation'].map('${:,.2f}'.format)
+income_statement_df['EBIT'] = income_statement_df['EBIT'].map('${:,.2f}'.format)
+income_statement_df['Interest Expense'] = income_statement_df['Interest Expense'].map('${:,.2f}'.format)
+income_statement_df['Net Income'] = income_statement_df['Net Income'].map('${:,.2f}'.format)
+
+# Print the income statement table
 print("Income Statement")
-print("Revenue: $", revenue)
-print("Cost of goods sold: $", cost_of_goods_sold)
-print("Gross profit: $", gross_profit)
-print("Operating expenses: $", operating_expenses)
-print("Net income: $", net_income)
-
+print(income_statement_df.to_string(index=False))
