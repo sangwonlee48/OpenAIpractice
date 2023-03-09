@@ -1,0 +1,15 @@
+# Input variables
+revenue = float(input("Enter revenue: "))
+cost_of_goods_sold = float(input("Enter cost of goods sold: "))
+gross_profit = revenue - cost_of_goods_sold
+operating_expenses = float(input("Enter operating expenses: "))
+net_income = gross_profit - operating_expenses
+
+# Print income statement
+print("Income Statement")
+print("Revenue: $", revenue)
+print("Cost of goods sold: $", cost_of_goods_sold)
+print("Gross profit: $", gross_profit)
+print("Operating expenses: $", operating_expenses)
+print("Net income: $", net_income)
+
